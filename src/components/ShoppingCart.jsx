@@ -1,14 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import CartContext from "../context/CartContext";
 
 function ShoppingCart() {
   const { cart, addCart, subtractCart } = useContext(CartContext);
-  let total = 0;
 
-  cart.forEach((product) => {
-    let subtotal = product.price * product.quantity;
-    total = total + subtotal;
-  });
+  // let total = 0;
+  // cart.forEach((product) => {
+  //   let subtotal = product.price * product.quantity;
+  //   total = total + subtotal;
+  // });
+
+  let total = useMemo(() => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  }, [cart]);
 
   return (
     <>

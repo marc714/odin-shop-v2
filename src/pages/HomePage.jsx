@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 // https://unsplash.com/photos/gray-and-blue-open-signage-c9FQyqIECds
 // https://source.unsplash.com/c9FQyqIECds
@@ -6,6 +6,11 @@ import { Link } from "react-router-dom";
 
 // hero splash page with links to shop
 export default function HomePage() {
+  const couponRef = useRef(null);
+  function showCoupon() {
+    couponRef.current.hidden = false;
+  }
+
   return (
     <>
       <section className="bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply">
@@ -14,10 +19,11 @@ export default function HomePage() {
             We have the world’s best products
           </h1>
           <p className="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
-            Here at E-Commerce 9000 we focus on markets where technology, innovation,
-            and capital can unlock long-term value and drive economic growth.
+            Here at E-Commerce 9000 we focus on markets where technology,
+            innovation, and capital can unlock long-term value and drive
+            economic growth.
           </p>
-          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 gap-10">
             <Link
               to="/shop"
               className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
@@ -39,12 +45,28 @@ export default function HomePage() {
                 />
               </svg>
             </Link>
+            <Link
+              onClick={showCoupon}
+              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
+            >
+              Show Discount!
+            </Link>
             {/* <a
               href="#"
               className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
             >
               Learn more
             </a> */}
+          </div>
+
+          <div
+            hidden
+            ref={couponRef}
+            className="mt-10 bg-gradient-to-br from-purple-600 to-indigo-600 text-white text-center py-10 px-20 rounded-lg shadow-md relative"
+          >
+            <span className="border-dashed border text-white px-4 py-2 rounded-l">
+              20% Off!
+            </span>
           </div>
         </div>
       </section>
